@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/top">
+    android:background="@color/layout_background">
 
     <ImageView
         android:id="@+id/imageView"
@@ -19,13 +19,14 @@
         app:srcCompat="@drawable/icon" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/t2"
         android:layout_width="290dp"
         android:layout_height="64dp"
         android:text="Weather App"
         android:textAlignment="center"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
@@ -34,12 +35,13 @@
         app:layout_constraintVertical_bias="0.601" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/t1"
         android:layout_width="303dp"
         android:layout_height="48dp"
         android:text="Developed by ayush"
         android:textAlignment="center"
         android:textSize="25sp"
+        android:textColor="@color/white"
         android:textFontWeight="700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
