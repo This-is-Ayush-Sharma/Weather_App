@@ -4,6 +4,12 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import com.google.gson.Gson
+import com.tinder.scarlet.Scarlet
+import com.tinder.scarlet.lifecycle.android.AndroidLifecycle
+import com.tinder.scarlet.websocket.okhttp.newWebSocketFactory
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 
 class MainActivity2 : AppCompatActivity() {
     lateinit var date:TextView
@@ -20,7 +26,29 @@ class MainActivity2 : AppCompatActivity() {
         time = findViewById(R.id.fetchTime)
         temp = findViewById(R.id.fetchTemprature)
         humi = findViewById(R.id.fetchHumidity)
+    val http = provideOkHttpClient()
+        val gson = Gson()
+        val scarletInstance = Scarlet.Builder()
+            .webSocketFactory(http.newWebSocketFactory("http://52.158.43.115:5000"))
+            .addMessageAdapterFactory(CustomGsonMessageAdapter.Factory(gson))
+            .addStreamAdapterFactory(FlowStreamAdapter.Factory)
+            .lifecycle(AndroidLifecycle.ofApplicationForeground(application))
+            .build()
+            .create(WeatherWs::class.java)
 
+
+
+
+        scarletInstance
+
+
+    }
+    fun provideOkHttpClient() : OkHttpClient{
+        return OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
+            .build()
 
     }
 }
